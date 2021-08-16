@@ -3,6 +3,7 @@ import './App.css';
 import Client from "./Client";
 import Header from "./Header";
 import ClientDetails from "./ClientDetails";
+import Alert from '@material-ui/lab/Alert';
 
 function App() {
     const [status, setStatus] = useState("all");
@@ -59,14 +60,15 @@ function App() {
             )
                 .then(function(response){
                     console.log(response);
+                    getData();
                     return response.json();
-
                 })
                 .then(function() {
-                    // console.log( id+" Deleted successfully");
-                    alert(id + " Deleted successfully");
+                    console.log( id+" Deleted successfully");
+                    return <Alert severity="success">Deleted client successfully!</Alert>;
+
                 });
-            getData();
+
         }
     function previousPage(){
         setStatus("all");
