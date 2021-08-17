@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
     const classes = useStyles();
-    console.log(props);
+    // console.log(props);
     return (
         <div className={classes.root}>
                 <Toolbar>

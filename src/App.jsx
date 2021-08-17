@@ -5,9 +5,23 @@ import Header from "./Header";
 import ClientDetails from "./ClientDetails";
 import Alert from '@material-ui/lab/Alert';
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+    },
+}));
+
 function App() {
+
+    const classes = useStyles();
     const [status, setStatus] = useState("all");
     const [data,setData]=useState([]);
+    const [alert, setAlert] = useState(false);
     const getData=()=>{
         fetch('https://61165a108f38520017a3881e.mockapi.io/clients'
             ,{
@@ -60,6 +74,7 @@ function App() {
             )
                 .then(function(response){
                     console.log(response);
+                    setAlert(true);
                     getData();
                     return response.json();
                 })
@@ -102,12 +117,14 @@ function App() {
     else{
         return (
             <div>
+                <div className={classes.root}><Alert severity="success">This is a success alert — check it out!</Alert></div>
             <Header
                 onBack = {previousPage}
                 status = {status}
                 name = {client.name}
             />
-                 <ClientDetails
+
+                <ClientDetails
                     createdAt={client.createdAt}
                     name={client.name}
                     key={client.id}
